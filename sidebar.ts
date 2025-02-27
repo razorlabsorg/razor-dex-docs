@@ -23,5 +23,37 @@ export const sidebar: Sidebar = {
         { text: 'Glossary', link: '/docs/concepts/glossary' },
       ],
     },
+    {
+      text: 'SDKs',
+      items: [
+        { text: 'Core SDK',
+          items: [
+            { text: 'Overview', link: '/docs/sdks/core/overview' },
+            { text: 'Technical Reference',
+              items: [
+                { text: 'Overview', link: '/docs/sdks/core/reference/overview' },
+                { text: 'Classes', 
+                  items: [
+                    { text: 'NativeCurrency', link: '/docs/sdks/core/reference/classes/native-currency' },
+                    { text: 'Token', link: '/docs/sdks/core/reference/classes/token' },
+                    { text: 'CurrencyAmount', link: '/docs/sdks/core/reference/classes/currency-amount' },
+                    { text: 'Fraction', link: '/docs/sdks/core/reference/classes/fraction' },
+                    { text: 'Percent', link: '/docs/sdks/core/reference/classes/percent' },
+                    { text: 'Price', link: '/docs/sdks/core/reference/classes/price' },
+                  ]
+                },
+                { text: 'Enums', 
+                  items: [
+                    { text: 'ChainId', link: '/docs/sdks/core/reference/enums/chain-id' },
+                    { text: 'Rounding', link: '/docs/sdks/core/reference/enums/rounding' },
+                    { text: 'TradeType', link: '/docs/sdks/core/reference/enums/trade-type' },
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   ],
 }
