@@ -40,6 +40,7 @@ export const sidebar: Sidebar = {
                     { text: 'Fraction', link: '/docs/sdks/core/reference/classes/fraction' },
                     { text: 'Percent', link: '/docs/sdks/core/reference/classes/percent' },
                     { text: 'Price', link: '/docs/sdks/core/reference/classes/price' },
+                    { text: 'Currency', link: '/docs/sdks/core/reference/classes/currency' },
                   ]
                 },
                 { text: 'Enums', 
@@ -48,12 +49,23 @@ export const sidebar: Sidebar = {
                     { text: 'Rounding', link: '/docs/sdks/core/reference/enums/rounding' },
                     { text: 'TradeType', link: '/docs/sdks/core/reference/enums/trade-type' },
                   ]
+                },
+                {
+                  text: 'Constants',
+                  items: [
+                    { text: 'BigintIsh', link: '/docs/sdks/core/reference/constants/bigintish' },
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
+        },
+        { text: 'AMM SDK',
+          items: [
+            { text: 'Overview', link: '/docs/sdks/amm/overview' },
+          ]
+        },
+      ],
     }
   ],
 }

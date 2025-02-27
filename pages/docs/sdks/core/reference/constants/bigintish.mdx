@@ -1,0 +1,52 @@
+# BigintIsh
+
+`BigintIsh` is a type alias that represents values that can be converted to a bigint.
+
+## Definition
+
+```tsx twoslash
+export type BigintIsh = bigint | number | string
+```
+
+## Description
+
+The `BigintIsh` type is used throughout the SDK to represent numeric values that can be converted to a bigint. This allows for flexibility when passing numeric values to functions, as you can use native JavaScript numbers, strings containing numeric values, or actual bigint values.
+
+## Usage
+
+`BigintIsh` is commonly used in functions that perform mathematical operations or when working with token amounts, where precision is important.
+
+### Example
+
+```tsx twoslash
+import { CurrencyAmount, Token, ChainId } from '@razorlabs/swap-sdk-core'
+
+const TEST_DAI_ADDRESS = '0xfdae7b1bf4b0009f2373ff9e2a636f04bcc8b2d82563de84f4b511f19278c417'
+
+export const token = new Token(
+  ChainId.BARDOCK_TESTNET,
+  TEST_DAI_ADDRESS,
+  6,
+  'tDAI',
+  'Test Dai Stablecoin',
+  'https://makerdao.com',
+)
+
+// Using a number
+const amountFromNumber = CurrencyAmount.fromRawAmount(token, 1000000)
+
+// Using a string
+const amountFromString = CurrencyAmount.fromRawAmount(token, '1000000')
+
+// Using a bigint
+const amountFromBigint = CurrencyAmount.fromRawAmount(token, 1000000n)
+```
+
+## Notes
+
+- When using `number` type with `BigintIsh`, be aware of JavaScript's number precision limitations. For very large values, it's recommended to use `string` or `bigint` to avoid precision loss.
+- When a function accepts `BigintIsh`, it will typically convert the value to a bigint internally for calculations.
+
+## Defined in
+
+[constants.ts:2](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/constants.ts#L2)
