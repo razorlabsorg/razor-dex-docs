@@ -1,13 +1,18 @@
 import { defineConfig } from 'vocs'
 import { sidebar } from './sidebar'
-import pkg from './package.json'
 
 export default defineConfig({
+  vite: {
+    server: {
+      port: 2045,
+      open: true,
+    },
+  },
   title: 'Razor DEX Docs',
   baseUrl:
     process.env.NODE_ENV === 'production'
       ? 'https://docs.razordex.xyz'
-      : 'http://localhost:5173',
+      : 'http://localhost:2045',
   titleTemplate: '%s . Razor DEX',
   description: 'Documentation for Razor DEX, the pioneer DEX on Movement network',
   editLink: {
@@ -46,7 +51,10 @@ export default defineConfig({
     },
   },
   topNav: [
-    { text: 'Docs', link: '/docs/getting-started', match: '/docs' },
+    {
+      text: 'Concepts',
+      link: '/docs/concepts',
+    },
     {
       text: 'SDKs',
       link: '/docs/sdks',
@@ -58,28 +66,6 @@ export default defineConfig({
     {
       text: 'APIs',
       link: '/docs/apis'
-    },
-    {
-      text: `v${pkg.version}`,
-      items: [
-        {
-          text: `Migrating to ${toPatchVersionRange(pkg.version)}`,
-          link: `/docs/migration-guide#_${toPatchVersionRange(pkg.version).replace(/\./g, '-')}-breaking-changes`,
-        },
-        {
-          text: 'Changelog',
-          link: 'https://github.com/razorlabsorg/razorkit/blob/master/CHANGELOG.md',
-        },
-        {
-          text: 'Contributing',
-          link: 'https://github.com/razorlabsorg/razorkit/blob/master/.github/CONTRIBUTING.md',
-        },
-      ],
-    },
+    }
   ],
 })
-
-function toPatchVersionRange(version: string) {
-  const [major, minor] = version.split('.').slice(0, 2)
-  return `${major}.${minor}.x`
-}

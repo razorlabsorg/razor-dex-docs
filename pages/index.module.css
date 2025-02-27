@@ -1,0 +1,75 @@
+.shadowCard {
+  display: flex;
+  max-height: 250px;
+  max-width: 350px;
+  text-wrap: wrap;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff10;
+  backdrop-filter: blur(10px);
+  min-height: 200px;
+}
+
+.shadowCard:hover {
+  border: 1px solid #363738;;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 960px) {
+  .shadowCard {
+    width: 100%;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 1rem 0;
+  max-width: 960px;
+}
+
+@media (max-width: 960px) {
+  .row {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+}
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.topSection {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+
+.iconWrapper {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+}
+
+.linkIconWrapper {
+  opacity: 0.25;
+}
+
