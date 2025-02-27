@@ -1,0 +1,79 @@
+# Currency
+
+The `Currency` type represents any fungible financial instrument that can be used within the Razor DEX ecosystem. 
+It serves as a union type of two specific currency implementations: `NativeCurrency` and `Token`.
+
+## Overview
+
+In the Razor DEX SDK, currencies are categorized into two main types:
+
+1. **Native Currencies**: Chain-native currencies like MOVE.
+2. **Tokens**: FA or similar token standards that exist on a blockchain.
+
+The `Currency` type allows functions and components to accept either type of currency as input, providing flexibility in the SDK's design.
+
+## Type Definition
+
+```typescript
+export type Currency = NativeCurrency | Token
+```
+
+## Properties
+
+All Currency implementations (both `NativeCurrency` and `Token`) inherit from `BaseCurrency` and include the following properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `chainId` | `number` | The chain ID on which this currency resides |
+| `decimals` | `number` | The decimals used in representing currency amounts |
+| `symbol` | `string` | The symbol of the currency (e.g., "MOVE", "USDC") |
+| `name` | `string \| undefined` | The name of the currency (e.g., "Move Coin", "USD Coin") |
+| `isNative` | `boolean` | Whether the currency is native to the chain |
+| `isToken` | `boolean` | Whether the currency is a token (non-native) |
+
+## Methods
+
+All Currency implementations provide these methods:
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `equals(other: Currency)` | `boolean` | Returns whether this currency is functionally equivalent to another currency |
+| `wrapped` | `Token` | Returns the wrapped version of this currency that can be used with DEX contracts |
+
+## Usage Examples
+
+### Working with a Currency
+
+```typescript
+function handleCurrency(currency: Currency) {
+  if (currency.isNative) {
+    // Handle native currency
+    console.log(`Native currency: ${currency.symbol}`);
+  } else {
+    // Handle token
+    console.log(`Token: ${currency.symbol} at address ${currency.address}`);
+  }
+  
+  // Properties available on all currencies
+  console.log(`Chain ID: ${currency.chainId}`);
+  console.log(`Decimals: ${currency.decimals}`);
+}
+```
+
+### Type Narrowing
+
+TypeScript can narrow the Currency type based on the `isNative` or `isToken` properties:
+
+```typescript
+function getAddress(currency: Currency): string {
+  if (currency.isToken) {
+    return currency.address; // TypeScript knows this is a Token
+  }
+  throw new Error("Native currencies don't have addresses");
+}
+```
+
+## Related Classes
+
+- [`NativeCurrency`](/docs/sdks/core/reference/classes/native-currency): Represents chain-native currencies
+- [`Token`](/docs/sdks/core/reference/classes/token): Represents FA or similar tokens

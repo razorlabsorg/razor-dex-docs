@@ -5,6 +5,7 @@
     "bigintish",
     "decimalscale",
     "equalto",
+    "fractionish",
     "fromfractionalamount",
     "fromrawamount",
     "greaterthan",
