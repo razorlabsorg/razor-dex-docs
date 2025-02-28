@@ -1,0 +1,32 @@
+# Getting Started
+
+The pages that follow contain technical reference information on the Razor DEX AMM SDK.
+Looking for a [quick start](/docs/sdks/amm/guides/quick-start) instead?
+You may also want to jump into a [guide](/docs/sdks/amm/guides/fetching-data),
+which offers a friendlier introduction to the SDK!
+
+The SDK is written in TypeScript, has a robust test suite, performs arbitrary precision arithmetic,
+and supports rounding to significant digits or fixed decimal places.
+The principal exports of the SDK are _entities_: classes that contain initialization and validation checks,
+necessary data fields, and helper functions.
+
+An important concept in the SDK is _fractions_. Because Move performs integer math, care must be taken in
+non-MoveVM environments to faithfully replicate the actual computation carried out on-chain.
+The first concern here is to ensure that an overflow-safe integer implementation is used.
+
+The second concern is precision loss due to, for example, chained price ratio calculations.
+To address this issue, all math operations are performed as fraction operations, ensuring arbitrary precision up
+until the point that values are rounded for display purposes, or truncated to fit inside a fixed bit width.
+
+The Fractions class, among others that the AMM SDK depends on, are exported from the SDK Core to allow interoperability with the CLAMM SDK(When it is ready). 
+Refer to the [Core SDK section of the docs](/docs/sdks/core/overview) to learn more about these classes.
+
+The SDK works for all Move chains on which the [factory](docs/contracts/amm/reference/smart-contracts/factory#address) is deployed.
+
+## Code
+
+The [source code is available on GitHub](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/amm-sdk).
+
+## Dependencies
+
+The SDK installs a small number of dependencies(https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/amm-sdk/package.json#L24).
