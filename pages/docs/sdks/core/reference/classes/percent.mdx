@@ -1,0 +1,393 @@
+# Class: Percent
+
+## Hierarchy
+
+- [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+  ↳ **`Percent`**
+
+## Table of contents
+
+### Constructors
+
+- [constructor](/docs/sdks/core/reference/classes/percent#constructor)
+
+### Properties
+
+- [denominator](/docs/sdks/core/reference/classes/percent#denominator)
+- [isPercent](/docs/sdks/core/reference/classes/percent#ispercent)
+- [numerator](/docs/sdks/core/reference/classes/percent#numerator)
+
+### Accessors
+
+- [asFraction](/docs/sdks/core/reference/classes/percent#asfraction)
+- [quotient](/docs/sdks/core/reference/classes/percent#quotient)
+- [remainder](/docs/sdks/core/reference/classes/percent#remainder)
+
+### Methods
+
+- [add](/docs/sdks/core/reference/classes/percent#add)
+- [divide](/docs/sdks/core/reference/classes/percent#divide)
+- [equalTo](/docs/sdks/core/reference/classes/percent#equalto)
+- [greaterThan](/docs/sdks/core/reference/classes/percent#greaterthan)
+- [invert](/docs/sdks/core/reference/classes/percent#invert)
+- [lessThan](/docs/sdks/core/reference/classes/percent#lessthan)
+- [multiply](/docs/sdks/core/reference/classes/percent#multiply)
+- [subtract](/docs/sdks/core/reference/classes/percent#subtract)
+- [toFixed](/docs/sdks/core/reference/classes/percent#tofixed)
+- [toSignificant](/docs/sdks/core/reference/classes/percent#tosignificant)
+
+## Constructors
+
+### constructor
+
+• **new Percent**(`numerator`, `denominator?`)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `numerator` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) |
+| `denominator` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) |
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[constructor](/docs/sdks/core/reference/classes/fraction#constructor)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:28](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L28)
+
+## Properties
+
+### denominator
+
+• `Readonly` **denominator**: `default`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[denominator](/docs/sdks/core/reference/classes/fraction#denominator)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:26](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L26)
+
+___
+
+### isPercent
+
+• `Readonly` **isPercent**: ``true``
+
+This boolean prevents a fraction from being interpreted as a Percent
+
+#### Defined in
+
+[entities/fractions/percent.ts:19](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/percent.ts#L19)
+
+___
+
+### numerator
+
+• `Readonly` **numerator**: `default`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[numerator](/docs/sdks/core/reference/classes/fraction#numerator)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:25](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L25)
+
+## Accessors
+
+### asFraction
+
+• `get` **asFraction**(): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+Helper method for converting any super class back to a fraction
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+Fraction.asFraction
+
+#### Defined in
+
+[entities/fractions/fraction.ts:154](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L154)
+
+___
+
+### quotient
+
+• `get` **quotient**(): `default`
+
+#### Returns
+
+`default`
+
+#### Inherited from
+
+Fraction.quotient
+
+#### Defined in
+
+[entities/fractions/fraction.ts:42](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L42)
+
+___
+
+### remainder
+
+• `get` **remainder**(): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+Fraction.remainder
+
+#### Defined in
+
+[entities/fractions/fraction.ts:47](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L47)
+
+## Methods
+
+### add
+
+▸ **add**(`other`): [`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+[`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[add](/docs/sdks/core/reference/classes/fraction#add)
+
+#### Defined in
+
+[entities/fractions/percent.ts:21](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/percent.ts#L21)
+
+___
+
+### divide
+
+▸ **divide**(`other`): [`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+[`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[divide](/docs/sdks/core/reference/classes/fraction#divide)
+
+#### Defined in
+
+[entities/fractions/percent.ts:33](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/percent.ts#L33)
+
+___
+
+### equalTo
+
+▸ **equalTo**(`other`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[equalTo](/docs/sdks/core/reference/classes/fraction#equalto)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:91](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L91)
+
+___
+
+### greaterThan
+
+▸ **greaterThan**(`other`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[greaterThan](/docs/sdks/core/reference/classes/fraction#greaterthan)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:99](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L99)
+
+___
+
+### invert
+
+▸ **invert**(): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[invert](/docs/sdks/core/reference/classes/fraction#invert)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:51](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L51)
+
+___
+
+### lessThan
+
+▸ **lessThan**(`other`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[lessThan](/docs/sdks/core/reference/classes/fraction#lessthan)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:83](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L83)
+
+___
+
+### multiply
+
+▸ **multiply**(`other`): [`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+[`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[multiply](/docs/sdks/core/reference/classes/fraction#multiply)
+
+#### Defined in
+
+[entities/fractions/percent.ts:29](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/percent.ts#L29)
+
+___
+
+### subtract
+
+▸ **subtract**(`other`): [`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+[`Percent`](/docs/sdks/core/reference/classes/percent)
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[subtract](/docs/sdks/core/reference/classes/fraction#subtract)
+
+#### Defined in
+
+[entities/fractions/percent.ts:25](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/percent.ts#L25)
+
+___
+
+### toFixed
+
+▸ **toFixed**(`decimalPlaces?`, `format?`, `rounding?`): `string`
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `decimalPlaces` | `number` | `2` |
+| `format?` | `object` | `undefined` |
+| `rounding?` | [`Rounding`](/docs/sdks/core/reference/enums/rounding) | `undefined` |
+
+#### Returns
+
+`string`
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[toFixed](/docs/sdks/core/reference/classes/fraction#tofixed)
+
+#### Defined in
+
+[entities/fractions/percent.ts:41](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/percent.ts#L41)
+
+___
+
+### toSignificant
+
+▸ **toSignificant**(`significantDigits?`, `format?`, `rounding?`): `string`
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `significantDigits` | `number` | `5` |
+| `format?` | `object` | `undefined` |
+| `rounding?` | [`Rounding`](/docs/sdks/core/reference/enums/rounding) | `undefined` |
+
+#### Returns
+
+`string`
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[toSignificant](/docs/sdks/core/reference/classes/fraction#tosignificant)
+
+#### Defined in
+
+[entities/fractions/percent.ts:37](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/percent.ts#L37)

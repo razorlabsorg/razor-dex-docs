@@ -1,0 +1,473 @@
+# Class: Price&lt;TBase, TQuote&gt;
+
+## Type parameters
+
+| Name     | Type                                                             |
+| :------- | :--------------------------------------------------------------- |
+| `TBase`  | extends [`Currency`](/docs/sdks/core/reference/classes/currency) |
+| `TQuote` | extends [`Currency`](/docs/sdks/core/reference/classes/currency) |
+
+## Hierarchy
+
+- [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+  ↳ **`Price`**
+
+## Table of contents
+
+### Constructors
+
+- [constructor](/docs/sdks/core/reference/classes/price#constructor)
+
+### Properties
+
+- [baseCurrency](/docs/sdks/core/reference/classes/price#basecurrency)
+- [denominator](/docs/sdks/core/reference/classes/price#denominator)
+- [numerator](/docs/sdks/core/reference/classes/price#numerator)
+- [quoteCurrency](/docs/sdks/core/reference/classes/price#quotecurrency)
+- [scalar](/docs/sdks/core/reference/classes/price#scalar)
+
+### Accessors
+
+- [adjustedForDecimals](/docs/sdks/core/reference/classes/price#adjustedfordecimals)
+- [asFraction](/docs/sdks/core/reference/classes/price#asfraction)
+- [quotient](/docs/sdks/core/reference/classes/price#quotient)
+- [remainder](/docs/sdks/core/reference/classes/price#remainder)
+
+### Methods
+
+- [add](/docs/sdks/core/reference/classes/price#add)
+- [divide](/docs/sdks/core/reference/classes/price#divide)
+- [equalTo](/docs/sdks/core/reference/classes/price#equalto)
+- [greaterThan](/docs/sdks/core/reference/classes/price#greaterthan)
+- [invert](/docs/sdks/core/reference/classes/price#invert)
+- [lessThan](/docs/sdks/core/reference/classes/price#lessthan)
+- [multiply](/docs/sdks/core/reference/classes/price#multiply)
+- [quote](/docs/sdks/core/reference/classes/price#quote)
+- [subtract](/docs/sdks/core/reference/classes/price#subtract)
+- [toFixed](/docs/sdks/core/reference/classes/price#tofixed)
+- [toSignificant](/docs/sdks/core/reference/classes/price#tosignificant)
+
+## Constructors
+
+### constructor
+
+• **new Price**&lt;`TBase`, `TQuote`&gt;(...`args`)
+
+Construct a price, either with the base and quote currency amount, or the
+
+#### Type parameters
+
+| Name     | Type                                                             |
+| :------- | :--------------------------------------------------------------- |
+| `TBase`  | extends [`Currency`](/docs/sdks/core/reference/classes/currency) |
+| `TQuote` | extends [`Currency`](/docs/sdks/core/reference/classes/currency) |
+
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[constructor](/docs/sdks/core/reference/classes/fraction#constructor)
+
+#### Defined in
+
+[entities/fractions/price.ts:18](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L18)
+
+## Properties
+
+### baseCurrency
+
+• `Readonly` **baseCurrency**: `TBase`
+
+#### Defined in
+
+[entities/fractions/price.ts:10](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L10)
+
+---
+
+### denominator
+
+• `Readonly` **denominator**: `default`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[denominator](/docs/sdks/core/reference/classes/fraction#denominator)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:26](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L26)
+
+---
+
+### numerator
+
+• `Readonly` **numerator**: `default`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[numerator](/docs/sdks/core/reference/classes/fraction#numerator)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:25](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L25)
+
+---
+
+### quoteCurrency
+
+• `Readonly` **quoteCurrency**: `TQuote`
+
+#### Defined in
+
+[entities/fractions/price.ts:11](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L11)
+
+---
+
+### scalar
+
+• `Readonly` **scalar**: [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Defined in
+
+[entities/fractions/price.ts:12](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L12)
+
+## Accessors
+
+### adjustedForDecimals
+
+• `Private` `get` **adjustedForDecimals**(): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+Get the value scaled by decimals for formatting
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Defined in
+
+[entities/fractions/price.ts:77](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L77)
+
+---
+
+### asFraction
+
+• `get` **asFraction**(): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+Helper method for converting any super class back to a fraction
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+Fraction.asFraction
+
+#### Defined in
+
+[entities/fractions/fraction.ts:154](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L154)
+
+---
+
+### quotient
+
+• `get` **quotient**(): `default`
+
+#### Returns
+
+`default`
+
+#### Inherited from
+
+Fraction.quotient
+
+#### Defined in
+
+[entities/fractions/fraction.ts:42](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L42)
+
+---
+
+### remainder
+
+• `get` **remainder**(): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+Fraction.remainder
+
+#### Defined in
+
+[entities/fractions/fraction.ts:47](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L47)
+
+## Methods
+
+### add
+
+▸ **add**(`other`): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Parameters
+
+| Name    | Type                                                                                                                     |
+| :------ | :----------------------------------------------------------------------------------------------------------------------- |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[add](/docs/sdks/core/reference/classes/fraction#add)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:55](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L55)
+
+---
+
+### divide
+
+▸ **divide**(`other`): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Parameters
+
+| Name    | Type                                                                                                                     |
+| :------ | :----------------------------------------------------------------------------------------------------------------------- |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[divide](/docs/sdks/core/reference/classes/fraction#divide)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:115](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L115)
+
+---
+
+### equalTo
+
+▸ **equalTo**(`other`): `boolean`
+
+#### Parameters
+
+| Name    | Type                                                                                                                     |
+| :------ | :----------------------------------------------------------------------------------------------------------------------- |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[equalTo](/docs/sdks/core/reference/classes/fraction#equalto)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:91](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L91)
+
+---
+
+### greaterThan
+
+▸ **greaterThan**(`other`): `boolean`
+
+#### Parameters
+
+| Name    | Type                                                                                                                     |
+| :------ | :----------------------------------------------------------------------------------------------------------------------- |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[greaterThan](/docs/sdks/core/reference/classes/fraction#greaterthan)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:99](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L99)
+
+---
+
+### invert
+
+▸ **invert**(): [`Price`](/docs/sdks/core/reference/classes/price)&lt;`TQuote`, `TBase`&gt;
+
+Flip the price, switching the base and quote currency
+
+#### Returns
+
+[`Price`](/docs/sdks/core/reference/classes/price)&lt;`TQuote`, `TBase`&gt;
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[invert](/docs/sdks/core/reference/classes/fraction#invert)
+
+#### Defined in
+
+[entities/fractions/price.ts:49](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L49)
+
+---
+
+### lessThan
+
+▸ **lessThan**(`other`): `boolean`
+
+#### Parameters
+
+| Name    | Type                                                                                                                     |
+| :------ | :----------------------------------------------------------------------------------------------------------------------- |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[lessThan](/docs/sdks/core/reference/classes/fraction#lessthan)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:83](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L83)
+
+---
+
+### multiply
+
+▸ **multiply**&lt;`TOtherQuote`&gt;(`other`): [`Price`](/docs/sdks/core/reference/classes/price)&lt;`TBase`, `TOtherQuote`&gt;
+
+Multiply the price by another price, returning a new price. The other price must have the same base currency as this price's quote currency
+
+#### Type parameters
+
+| Name          | Type                                                             |
+| :------------ | :--------------------------------------------------------------- |
+| `TOtherQuote` | extends [`Currency`](/docs/sdks/core/reference/classes/currency) |
+
+#### Parameters
+
+| Name    | Type                                                                              | Description     |
+| :------ | :-------------------------------------------------------------------------------- | :-------------- |
+| `other` | [`Price`](/docs/sdks/core/reference/classes/price)&lt;`TQuote`, `TOtherQuote`&gt; | the other price |
+
+#### Returns
+
+[`Price`](/docs/sdks/core/reference/classes/price)&lt;`TBase`, `TOtherQuote`&gt;
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[multiply](/docs/sdks/core/reference/classes/fraction#multiply)
+
+#### Defined in
+
+[entities/fractions/price.ts:57](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L57)
+
+---
+
+### quote
+
+▸ **quote**(`currencyAmount`): [`CurrencyAmount`](/docs/sdks/core/reference/classes/currency-amount)&lt;`TQuote`&gt;
+
+Return the amount of quote currency corresponding to a given amount of the base currency
+
+#### Parameters
+
+| Name             | Type                                                                                 | Description                                            |
+| :--------------- | :----------------------------------------------------------------------------------- | :----------------------------------------------------- |
+| `currencyAmount` | [`CurrencyAmount`](/docs/sdks/core/reference/classes/currency-amount)&lt;`TBase`&gt; | the amount of base currency to quote against the price |
+
+#### Returns
+
+[`CurrencyAmount`](/docs/sdks/core/reference/classes/currency-amount)&lt;`TQuote`&gt;
+
+#### Defined in
+
+[entities/fractions/price.ts:67](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L67)
+
+---
+
+### subtract
+
+▸ **subtract**(`other`): [`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Parameters
+
+| Name    | Type                                                                                                                     |
+| :------ | :----------------------------------------------------------------------------------------------------------------------- |
+| `other` | [`BigintIsh`](/docs/sdks/core/reference/constants/bigintish) \| [`Fraction`](/docs/sdks/core/reference/classes/fraction) |
+
+#### Returns
+
+[`Fraction`](/docs/sdks/core/reference/classes/fraction)
+
+#### Inherited from
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[subtract](/docs/sdks/core/reference/classes/fraction#subtract)
+
+#### Defined in
+
+[entities/fractions/fraction.ts:69](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/fraction.ts#L69)
+
+---
+
+### toFixed
+
+▸ **toFixed**(`decimalPlaces?`, `format?`, `rounding?`): `string`
+
+#### Parameters
+
+| Name            | Type                                                   | Default value |
+| :-------------- | :----------------------------------------------------- | :------------ |
+| `decimalPlaces` | `number`                                               | `4`           |
+| `format?`       | `object`                                               | `undefined`   |
+| `rounding?`     | [`Rounding`](/docs/sdks/core/reference/enums/rounding) | `undefined`   |
+
+#### Returns
+
+`string`
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[toFixed](/docs/sdks/core/reference/classes/fraction#tofixed)
+
+#### Defined in
+
+[entities/fractions/price.ts:85](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L85)
+
+---
+
+### toSignificant
+
+▸ **toSignificant**(`significantDigits?`, `format?`, `rounding?`): `string`
+
+#### Parameters
+
+| Name                | Type                                                   | Default value |
+| :------------------ | :----------------------------------------------------- | :------------ |
+| `significantDigits` | `number`                                               | `6`           |
+| `format?`           | `object`                                               | `undefined`   |
+| `rounding?`         | [`Rounding`](/docs/sdks/core/reference/enums/rounding) | `undefined`   |
+
+#### Returns
+
+`string`
+
+#### Overrides
+
+[Fraction](/docs/sdks/core/reference/classes/fraction).[toSignificant](/docs/sdks/core/reference/classes/fraction#tosignificant)
+
+#### Defined in
+
+[entities/fractions/price.ts:81](https://github.com/razorlabsorg/razor-dex-sdk/blob/master/packages/core-sdk/src/fractions/price.ts#L81)
