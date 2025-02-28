@@ -1,0 +1,42 @@
+# Pair Addresses
+
+# get_pair
+
+The most obvious way to get the address for a pair is to call [get_pair](/docs/contracts/amm/reference/smart-contracts/factory#getpair) 
+on the factory. If the pair exists, this function will return its address, else `0x0`.
+
+- The "canonical" way to determine whether or not a pair exists.
+- Requires an on-chain lookup.
+
+# Off-chain Computation
+
+We can also compute pair addresses _without any on-chain lookups_ .
+
+```tsx twoslash
+import { Token } from '@razorlabs/swap-sdk-core'
+import { AMM_SIGNER } from '@razorlabs/amm-sdk'
+import { AccountAddress, createObjectAddress, Hex } from '@aptos-labs/ts-sdk'
+
+const getPairSeed = (token0: Token, token1: Token): string => {
+  const validatedToken0Address = AccountAddress.from(token0.address).toStringLong()
+  const validatedToken1Address = AccountAddress.from(token1.address).toStringLong()
+  if (token0.sortsBefore(token1)) {
+    return validatedToken0Address + validatedToken1Address.slice(2)
+  } else {
+    return validatedToken1Address + validatedToken0Address.slice(2)
+  }
+}
+
+export const computePairAddress = ({ tokenA, tokenB }: { tokenA: Token; tokenB: Token }): string => {
+  const rawSeed = getPairSeed(tokenA, tokenB)
+  const seed = Hex.fromHexInput(rawSeed).toUint8Array()
+  const account = AccountAddress.from(AMM_SIGNER)
+  const address = createObjectAddress(account, seed)
+
+  return address.toString()
+}
+```
+
+- `token0` must be strictly less than `token1` by sort order.
+
+* Can be computed offline.

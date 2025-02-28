@@ -97,6 +97,43 @@ export const sidebar: Sidebar = {
       ],
     },
     {
+      text: 'Contracts',
+      collapsed: true,
+      items: [
+        { text: 'AMM', 
+          collapsed: true,
+          items: [
+            { text: 'Overview', link: '/docs/contracts/amm/overview' },
+            { text: 'Technical Reference',
+              collapsed: true,
+              items: [
+                { text: 'Overview', link: '/docs/contracts/amm/reference/overview' },
+                { text: 'API',
+                  collapsed: true,
+                  items: [
+                    { text: 'Overview', link: '/docs/contracts/amm/reference/api/overview' },
+                  ]
+                },
+                { text: 'Smart Contracts',
+                  collapsed: true,
+                  items: [
+                    { text: 'Controller', link: '/docs/contracts/amm/reference/smart-contracts/controller' },
+                    { text: 'Factory', link: '/docs/contracts/amm/reference/smart-contracts/factory' },
+                    { text: 'Pair', link: '/docs/contracts/amm/reference/smart-contracts/pair' },
+                    { text: 'Router', link: '/docs/contracts/amm/reference/smart-contracts/router' },
+                    { text: 'Oracle', link: '/docs/contracts/amm/reference/smart-contracts/oracle' },
+                    { text: 'Oracle Library', link: '/docs/contracts/amm/reference/smart-contracts/oracle-library' },
+                    { text: 'Common Errors', link: '/docs/contracts/amm/reference/smart-contracts/common-errors' },
+                    { text: 'Deployment Addresses', link: '/docs/contracts/amm/reference/smart-contracts/deployment-addresses' },
+                  ]
+                },
+              ]
+            },
+          ]
+        },
+      ],
+    },
+    {
       text: 'APIs',
       collapsed: true,
       items: [

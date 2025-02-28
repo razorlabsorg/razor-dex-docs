@@ -1,0 +1,100 @@
+# Trading
+
+> Looking for a [quickstart](/docs/sdks/amm/guides/quick-start)?
+
+The SDK _cannot execute trades or send transactions on your behalf_. Rather, it offers utility 
+classes and functions which make it easy to calculate the data required to safely interact with 
+Razor DEX. Nearly everything you need to safely transact with Razor DEX is provided by the 
+[Trade](/docs/sdks/amm/reference/trade) entity. However, it is your responsibility to use this data 
+to send transactions in whatever context makes sense for your application.
+
+This guide will focus exclusively on sending a transaction to the [Razor DEX AMM router](/docs/contracts/amm/reference/smart-contracts/router)
+
+# Sending a Transaction to the Router
+
+Let's say we want to trade 1 MOVE for as much DAI as possible:
+
+```tsx twoslash
+import { ChainId, Token, CurrencyAmount, TradeType } from '@razorlabs/swap-sdk-core'
+import { Trade, Route, WMOVE, Pair } from '@razorlabs/amm-sdk'
+
+const DAI = new Token(ChainId.MAINNET, '0xfdae7b1bf4b0009f2373ff9e2a636f04bcc8b2d82563de84f4b511f19278c417', 6, 'tDAI')
+
+const currencyAmountA = CurrencyAmount.fromRawAmount(DAI, 1000)
+const currencyAmountB = CurrencyAmount.fromRawAmount(WMOVE[ChainId.MAINNET], 1000)
+
+// To learn how to get Pair data, refer to the previous guide.
+const pair = new Pair(currencyAmountA, currencyAmountB)
+
+const route = new Route([pair], WMOVE[ChainId.MAINNET], DAI)
+
+const amountIn = '1000000000000000000' //
+
+const trade = new Trade(route, CurrencyAmount.fromRawAmount(WMOVE[ChainId.MAINNET], amountIn), TradeType.EXACT_INPUT)
+```
+
+So, we've constructed a trade entity, but how do we use it to actually send a transaction? There are 
+still a few pieces we need to put in place.
+
+The first step is selecting the appropriate router function. The names of router functions are intended 
+to be self-explanatory; in this case we want [swap_exact_move_for_tokens](docs/contracts/amm/reference/smart-contracts/router#swapexactmovefortokens), 
+because we're swapping an exact amount of MOVE for tokens.
+
+That Move interface for this function is:
+
+```move
+public entry fun swap_exact_move_for_tokens(
+  sender: &signer,
+  amount_move: u64,
+  amount_out_min: u64,
+  path: vector<address>,
+  to: address,
+  deadline: u64,
+) {
+  // implementation
+}
+```
+
+Jumping back to our trading code, we can construct all the necessary parameters:
+
+```tsx twoslash
+import { Percent, ChainId, Token, CurrencyAmount, TradeType } from '@razorlabs/swap-sdk-core'
+import { WMOVE, Trade, Pair, Route } from '@razorlabs/amm-sdk'
+
+const slippageTolerance = new Percent('50', '10000') // 50 bips, or 0.50%
+
+const DAI = new Token(ChainId.MAINNET, '0xfdae7b1bf4b0009f2373ff9e2a636f04bcc8b2d82563de84f4b511f19278c417', 6, 'tDAI')
+const currencyAmountA = CurrencyAmount.fromRawAmount(DAI, 1000)
+const currencyAmountB = CurrencyAmount.fromRawAmount(WMOVE[ChainId.MAINNET], 1000)
+
+// To learn how to get Pair data, refer to the previous guide.
+const pair = new Pair(currencyAmountA, currencyAmountB)
+
+const route = new Route([pair], WMOVE[ChainId.MAINNET], DAI)
+
+const amountIn = '1000000000000000000' //
+
+const trade = new Trade(route, CurrencyAmount.fromRawAmount(WMOVE[ChainId.MAINNET], amountIn), TradeType.EXACT_INPUT)
+
+const amountOutMin = trade.minimumAmountOut(slippageTolerance).toExact() // needs to be converted to e.g. decimal string
+const path = [WMOVE[ChainId.MAINNET].address, DAI.address]
+const to = '' // should be a recipient address
+const deadline = Math.floor(Date.now() / 1000) + 60 * 20 // 20 minutes from the current Unix time
+const value = trade.inputAmount.toExact() // // needs to be converted to e.g. decimal string
+```
+
+The slippage tolerance encodes _how large of a price movement we're willing to tolerate before our 
+trade will fail to execute_. We use this slippage tolerance to calculate the _minimum_ amount of DAI 
+we must receive before our trade reverts, thanks to [minimumAmountOut](/docs/sdks/amm/reference/trade#minimumamountout). 
+Note that this code calculates this worst-case outcome _assuming that the current price, i.e the 
+route's mid price,_ is fair (usually a good assumption because of arbitrage).
+
+The path is simply the ordered list of token addresses we're trading through, in our case MOVE and 
+DAI
+
+The to address is the address that will receive the DAI.
+
+The deadline is the Unix timestamp after which the transaction will fail, to protect us in the case 
+that our transaction takes a long time to confirm and we wish to rescind our trade.
+
+The value is the amount of MOVE that must be included as the `amount_move` in our transaction.
