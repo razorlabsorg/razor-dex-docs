@@ -1,0 +1,162 @@
+# Module `razor_amm::amm_controller`
+
+- [Resource `SwapConfig`](#SwapConfig)
+- [Constants](#Constants)
+- [Function `get_signer`](#get_signer)
+- [Function `get_signer_address`](#get_signer_address)
+- [Function `get_fee_to`](#get_fee_to)
+- [Function `get_admin`](#get_admin)
+- [Function `get_fee_on`](#get_fee_on)
+- [Function `assert_paused`](#assert_paused)
+- [Function `assert_unpaused`](#assert_unpaused)
+- [Function `pause`](#pause)
+- [Function `unpause`](#unpause)
+- [Function `set_fee_to`](#set_fee_to)
+- [Function `set_admin_address`](#set_admin_address)
+- [Function `claim_admin`](#claim_admin)
+
+
+## Resource `SwapConfig`
+
+Configuration object that manages AMM protocol settings and administrative controls.
+This is a singleton object stored at the @razor_amm address.
+
+```move
+struct SwapConfig has key
+```
+
+## Constants
+
+```move
+const ADMIN: address = 0xfaded96b72a03b2ed9e2b2dc0bef0642d63e07fd7b1eeeac047188eb1ef34dd6;
+```
+
+Operation is not allowed
+
+```move
+const ERROR_FORBIDDEN: u64 = 3;
+```
+
+Invalid Address
+
+```move
+const ERROR_INVALID_ADDRESS: u64 = 5;
+```
+
+No Pending Admin
+
+```move
+const ERROR_NO_PENDING_ADMIN: u64 = 4;
+```
+
+No operations are allowed when contract is paused
+
+```move
+const ERROR_PAUSED: u64 = 1;
+```
+
+Pending Admin Exists
+
+```move
+const ERROR_PENDING_ADMIN_EXISTS: u64 = 6;
+```
+
+Contract is needs to be paused first
+
+```move
+const ERROR_UNPAUSED: u64 = 2;
+```
+
+```move
+const FEE_ADMIN: address = 0xdadface12f06592ecb04ea00cd11c6ff7050890881c8ec58c2011955352c9f1a;
+```
+
+## Function `get_signer`
+
+Can be called by friended modules to obtain the object signer.
+
+```move
+public friend fun get_signer(): signer
+```
+
+## Function `get_signer_address`
+
+```move
+#[view]
+public fun get_signer_address(): address
+```
+
+## Function `get_fee_to`
+
+```move
+#[view]
+public fun get_fee_to(): address
+```
+
+## Function `get_admin`
+
+```move
+#[view]
+public fun get_admin(): address
+```
+
+## Function `get_fee_on`
+
+```move
+#[view]
+public fun get_fee_on(): bool
+```
+
+## Function `assert_paused`
+
+Asserts that the protocol is in paused state
+Aborts if protocol is not paused
+
+```move
+public fun assert_paused()
+```
+
+## Function `assert_unpaused`
+
+Asserts that the protocol is not paused
+Aborts if protocol is paused
+
+```move
+public fun assert_unpaused()
+```
+
+## Function `pause`
+
+Pauses the protocol
+Can only be called by the current admin
+
+```move
+public friend fun pause(account: &signer)
+```
+
+## Function `unpause`
+
+Unpauses the protocol
+Can only be called by the current admin
+
+```move
+public friend fun unpause(account: &signer)
+```
+
+## Function `set_fee_to`
+
+```move
+public friend fun set_fee_to(account: &signer, fee_to: address)
+```
+
+## Function `set_admin_address`
+
+```move
+public friend fun set_admin_address(account: &signer, admin_address: address)
+```
+
+## Function `claim_admin`
+
+```move
+public friend fun claim_admin(account: &signer)
+```
