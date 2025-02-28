@@ -53,19 +53,19 @@ export default defineConfig({
   topNav: [
     {
       text: 'Concepts',
-      link: '/docs/concepts',
+      link: '/docs/concepts/overview',
     },
     {
       text: 'SDKs',
-      link: '/docs/sdks',
+      link: '/docs/sdks/core/overview',
     },
     {
       text: 'Contracts',
-      link: '/docs/contracts'
+      link: '/docs/contracts/amm/overview',
     },
     {
       text: 'APIs',
-      link: '/docs/apis'
+      link: '/docs/apis/overview',
     }
   ],
 })

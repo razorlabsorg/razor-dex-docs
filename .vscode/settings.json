@@ -6,11 +6,13 @@
     "basecurrency",
     "bigintish",
     "chainid",
+    "DAIUSDC",
     "decimalscale",
     "equalto",
     "fractionish",
     "fromfractionalamount",
     "fromrawamount",
+    "getreserves",
     "greaterthan",
     "hackathon",
     "isnative",
@@ -22,6 +24,8 @@
     "toexact",
     "tofixed",
     "tosignificant",
-    "twoslash"
+    "twoslash",
+    "USDCMOVE",
+    "WMOVE"
   ]
 }

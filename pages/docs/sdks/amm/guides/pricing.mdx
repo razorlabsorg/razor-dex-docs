@@ -1,0 +1,93 @@
+# Pricing
+
+> Looking for a [quickstart](/docs/sdks/amm/guides/quick-start)?
+
+Let's talk pricing. This guide will focus on the two most important Razor DEX prices: the **mid price** 
+and the **execution price**.
+
+# Mid Price
+
+The mid price, in the context of Razor DEX, is the price that reflects the _ratio of reserves in one or more pairs_. There are three ways we can think about this price. Perhaps most simply, it defines the relative value of one token in terms of the other. It also represents the price at which you could theoretically trade an infinitesimal amount (ε) of one token for the other. Finally, it can be interpreted as the current _market-clearing or fair value price_ of the assets.
+
+Let's consider the mid price for DAI-MOVE (that is, the amount of DAI per 1 MOVE).
+
+## Direct
+
+The simplest way to get the DAI-MOVE mid price is to observe the pair directly:
+
+```tsx twoslash
+import { ChainId, Token, CurrencyAmount } from '@razorlabs/swap-sdk-core'
+import { Route, WMOVE, Pair } from '@razorlabs/amm-sdk'
+
+const DAI = new Token(ChainId.MAINNET, '0xfdae7b1bf4b0009f2373ff9e2a636f04bcc8b2d82563de84f4b511f19278c417', 6, 'tDAI')
+
+const currencyAmountA = CurrencyAmount.fromRawAmount(DAI, 1000)
+const currencyAmountB = CurrencyAmount.fromRawAmount(WMOVE[ChainId.MAINNET], 1000)
+
+// To learn how to get Pair data, refer to the previous guide.
+const pair = new Pair(currencyAmountA, currencyAmountB)
+
+const route = new Route([pair], WMOVE[ChainId.MAINNET], DAI)
+
+console.log(route.midPrice.toSignificant(6)) // 1901.08
+console.log(route.midPrice.invert().toSignificant(6)) // 0.000526017
+```
+
+You may be wondering why we have to construct a _route_ to get the mid price, as opposed to simply getting it from the pair (which, after all, includes all the necessary data). The reason is simple: a route forces us to be opinionated about the _direction_ of trading. Routes consist of one or more pairs, an input token and an output token (which fully defines a trading path). In this case, we passed MOVE as the input token and DAI as the output token, meaning we're interested in a MOVE -> DAI trade.
+
+Now we understand that the mid price is going to be defined in terms of DAI/MOVE. Not to worry though, if we need the MOVE/DAI price, we can easily invert.
+
+Finally, you may have noticed that we're formatting the price to 6 significant digits. This is because internally, prices are stored as exact-precision fractions, which can be converted to other representations on demand. For a full list of options, see [Price](/docs/sdks/core/reference/classes/price).
+
+## Indirect
+
+For the sake of example, let's imagine a direct pair between DAI and MOVE _doesn't exist_. In order to get a DAI-MOVE mid price we'll need to pick a valid route. Imagine both DAI and MOVE have pairs with a third token, USDC. In that case, we can calculate an indirect mid price through the USDC pairs:
+
+```tsx twoslash
+import { ChainId, Token, CurrencyAmount } from '@razorlabs/swap-sdk-core'
+import { Route, Pair, WMOVE } from '@razorlabs/amm-sdk'
+
+const USDC = new Token(ChainId.MAINNET, '0x63299f5dcc23daa43c841fb740ba094845a1b9c36f69e8ba5f387574f2dd6e7c', 6, 'tUSDC')
+const DAI = new Token(ChainId.MAINNET, '0xfdae7b1bf4b0009f2373ff9e2a636f04bcc8b2d82563de84f4b511f19278c417', 6, 'tDAI')
+
+const currencyAmountUsdc = CurrencyAmount.fromRawAmount(USDC, 1000)
+const currencyAmountDai = CurrencyAmount.fromRawAmount(DAI, 1000)
+const currencyAmountMove = CurrencyAmount.fromRawAmount(WMOVE[ChainId.MAINNET], 1000)
+
+// To learn how to get Pair data, refer to the previous guide.
+const USDCMOVEPair = new Pair(currencyAmountUsdc, currencyAmountMove)
+const DAIUSDCPair = new Pair(currencyAmountDai, currencyAmountUsdc)
+
+const route = new Route([USDCMOVEPair, DAIUSDCPair], WMOVE[ChainId.MAINNET], DAI)
+
+console.log(route.midPrice.toSignificant(6)) // 1896.34
+console.log(route.midPrice.invert().toSignificant(6)) // 0.000527331
+```
+
+# Execution Price
+
+Mid prices are great representations of the _current_ state of a route, but what about trades? It turns out that it makes sense to define another price, the _execution_ price of a trade, as the ratio of assets sent/received.
+
+Imagine we're interested in trading 1 MOVE for DAI:
+
+```tsx twoslash
+import { ChainId, Token, CurrencyAmount, TradeType } from '@razorlabs/swap-sdk-core'
+import { Route, Pair, Trade, WMOVE } from '@razorlabs/amm-sdk'
+
+const DAI = new Token(ChainId.MAINNET, '0xfdae7b1bf4b0009f2373ff9e2a636f04bcc8b2d82563de84f4b511f19278c417', 6, 'tDAI')
+
+const currencyAmountDai = CurrencyAmount.fromRawAmount(DAI, 1000)
+const currencyAmountMove = CurrencyAmount.fromRawAmount(WMOVE[ChainId.MAINNET], 1000000000000000000)
+
+// To learn how to get Pair data, refer to the previous guide.
+const pair = new Pair(currencyAmountDai, currencyAmountMove)
+
+const route = new Route([pair], WMOVE[ChainId.MAINNET], DAI)
+
+const trade = new Trade(route, currencyAmountMove, TradeType.EXACT_INPUT)
+
+console.log(trade.executionPrice.toSignificant(6)) // 1894.91
+```
+
+Notice that we're constructing a trade of 1 MOVE for as much DAI as possible, _given the current reserves of the direct pair_. The execution price represents the average DAI/MOVE price for this trade. Of course, the reserves of any pair can change every second, which would affect the execution price.
+

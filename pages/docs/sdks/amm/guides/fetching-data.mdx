@@ -1,0 +1,146 @@
+# Fetching Data
+
+> Looking for a [quickstart](/docs/sdks/amm/guides/quick-start)?
+
+While the SDK is fully self-contained, there are two cases where it needs _on-chain data_ to function.
+This guide will detail both of these cases, and offer a sample that you can use to fetch this data.
+
+# Case 1: Tokens
+
+Unsurprisingly, the SDK needs some notion of a fungible token to be able to function. This immediately 
+raises the question of _where data about tokens comes from_.
+
+As an example, let's try to represent USDT in a format the SDK can work with. To do so, we need at 
+least 3 pieces of data: a **chainId**, a **token address**, and how many **decimals** the token has. 
+We also may be interested in the **symbol** and/or **name** of the token.
+
+## Identifying Data
+
+The first two pieces of data — **chainId** and **token address** — must be provided by us. Thinking 
+about it, this makes sense, as there's really no other way to unambiguously identify a token.
+
+So, in the case of USDT, we know that the **chainId** is `126` (we're on mainnet), and the **token address** 
+is `0xe5df458e0bb7020247d5e8c4f5fda70adaccff5318bb456bad8f7c1e3d2bf744`. Note that it's very important 
+to externally verify token addresses. Don't use addresses from sources you don't trust!
+
+## Required Data
+
+The next piece of data we need is **decimals**.
+
+### Provided by the User
+
+One option here is to simply pass in the correct value, which we may know is `6`. At this point, 
+we're ready to represent USDT as a [Token](/docs/sdks/core/reference/classes/token):
+
+```tsx twoslash
+import { ChainId, Token } from '@razorlabs/swap-sdk-core'
+
+const chainId = ChainId.MAINNET
+const tokenAddress = '0xe5df458e0bb7020247d5e8c4f5fda70adaccff5318bb456bad8f7c1e3d2bf744'
+const decimals = 6
+const symbol = 'tUSDT'
+
+const DAI = new Token(chainId, tokenAddress, decimals, symbol)
+```
+
+If we don't know or don't want to hardcode the value, we could look it up ourselves via any method 
+of retrieving on-chain data in a function that looks something like:
+
+```tsx twoslash
+import { ChainId } from '@razorlabs/swap-sdk-core'
+import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk'
+
+export function getNetworkRPCUrl(chainId: ChainId) {
+  switch (chainId) {
+    case ChainId.BARDOCK_TESTNET:
+      return 'https://aptos.testnet.bardock.movementlabs.xyz/v1'
+    default:
+      return 'https://mainnet.movementnetwork.xyz/v1'
+  }
+}
+
+export function getNetworkIndexerUrl(chainId: ChainId) {
+  switch (chainId) {
+    case ChainId.BARDOCK_TESTNET:
+      return 'https://indexer.mainnet.movementnetwork.xyz/v1/graphql'
+    default:
+      return 'https://indexer.testnet.movementnetwork.xyz/v1/graphql'
+  }
+}
+
+export function getDefaultProvider(chainId: ChainId) {
+  const config = new AptosConfig({
+    fullnode: getNetworkRPCUrl(chainId),
+    indexer: getNetworkIndexerUrl(chainId),
+  })
+  const provider = new Aptos(config)
+  return provider
+}
+
+async function getDecimals(chainId: ChainId, address: string): Promise<number> {
+  const provider = getDefaultProvider(chainId).fungibleAsset;
+  const tokenMetadata = await provider.getFungibleAssetMetadataByAssetType({ 
+    assetType: address 
+  });
+  return tokenMetadata.decimals
+}
+```
+
+## Optional Data
+
+Finally, we can talk about **projectLink** and **name**. Because these fields aren't used anywhere 
+in the SDK itself, they're optional, and can be provided if you want to use them in your application. 
+However, the SDK will not fetch them for you, so you'll have to provide them:
+
+```tsx twoslash
+import { ChainId, Token } from '@razorlabs/swap-sdk-core'
+
+const USDT = new Token(
+  ChainId.MAINNET, 
+  '0xe5df458e0bb7020247d5e8c4f5fda70adaccff5318bb456bad8f7c1e3d2bf744', 
+  6, 
+  'tUSDT', 
+  'Tether USD',
+  'https://tether.to'
+)
+```
+
+
+# Case 2: Pairs
+
+Now that we've explored how to define a token, let's talk about pairs. To read more about what 
+Razor DEX pairs are, see [Pair](/docs/contracts/amm/reference/smart-contracts/pair)
+
+As an example, let's try to represent the DAI-MOVE pair.
+
+## Identifying Data
+
+Each pair consists of two tokens (see previous section).
+
+## Required Data
+
+The data we need is the _reserves_ of the pair. To read more about reserves, see [getReserves](/docs/contracts/amm/reference/smart-contracts/pair#getreserves).
+
+### Provided by the User
+
+One option here is to simply pass in values which we've fetched ourselves to create a [Pair](/docs/sdks/amm/reference/pair). 
+In this example we use ethers to fetch the data directly from the blockchain:
+
+```tsx twoslash
+import { ChainId, Token, CurrencyAmount } from '@razorlabs/swap-sdk-core'
+import { Pair, WMOVE } from '@razorlabs/amm-sdk'
+
+const DAI = new Token(ChainId.MAINNET, '0xfdae7b1bf4b0009f2373ff9e2a636f04bcc8b2d82563de84f4b511f19278c417', 6, 'tDAI')
+
+function createPair(): Pair {
+  const tokens = [DAI, WMOVE[ChainId.MAINNET]]
+  const [token0, token1] = tokens[0].sortsBefore(tokens[1]) ? tokens : [tokens[1], tokens[0]]
+  const currencyAmount0 = CurrencyAmount.fromRawAmount(token0, 100000)
+  const currencyAmount1 = CurrencyAmount.fromRawAmount(token1, 109)
+
+  const pair = new Pair(currencyAmount0, currencyAmount1)
+  return pair
+}
+```
+
+Note that these values can change as frequently as every block, and should be kept up-to-date.

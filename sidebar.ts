@@ -95,6 +95,13 @@ export const sidebar: Sidebar = {
           ]
         },
       ],
+    },
+    {
+      text: 'APIs',
+      collapsed: true,
+      items: [
+        { text: 'Overview', link: '/docs/apis/overview' },
+      ]
     }
   ],
 }
