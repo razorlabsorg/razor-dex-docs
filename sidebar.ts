@@ -4,6 +4,7 @@ export const sidebar: Sidebar = {
   '/docs/': [
     {
       text: 'Concepts',
+      collapsed: true,
       items: [
         { text: 'Razor DEX Overview', link: '/docs/concepts/overview' },
         {
@@ -12,6 +13,7 @@ export const sidebar: Sidebar = {
         },
         {
           text: 'Protocol Concepts',
+          collapsed: true,
           items: [
             { text: 'Swaps', link: '/docs/concepts/protocol/swaps' },
             {
@@ -25,14 +27,18 @@ export const sidebar: Sidebar = {
     },
     {
       text: 'SDKs',
+      collapsed: true,
       items: [
         { text: 'Core SDK',
+          collapsed: true,
           items: [
             { text: 'Overview', link: '/docs/sdks/core/overview' },
             { text: 'Technical Reference',
+              collapsed: true,
               items: [
                 { text: 'Overview', link: '/docs/sdks/core/reference/overview' },
-                { text: 'Classes', 
+                { text: 'Classes',
+                  collapsed: true, 
                   items: [
                     { text: 'NativeCurrency', link: '/docs/sdks/core/reference/classes/native-currency' },
                     { text: 'Token', link: '/docs/sdks/core/reference/classes/token' },
@@ -44,6 +50,7 @@ export const sidebar: Sidebar = {
                   ]
                 },
                 { text: 'Enums', 
+                  collapsed: true,
                   items: [
                     { text: 'ChainId', link: '/docs/sdks/core/reference/enums/chain-id' },
                     { text: 'Rounding', link: '/docs/sdks/core/reference/enums/rounding' },
@@ -52,6 +59,7 @@ export const sidebar: Sidebar = {
                 },
                 {
                   text: 'Constants',
+                  collapsed: true,
                   items: [
                     { text: 'BigintIsh', link: '/docs/sdks/core/reference/constants/bigintish' },
                   ]
@@ -61,8 +69,29 @@ export const sidebar: Sidebar = {
           ]
         },
         { text: 'AMM SDK',
+          collapsed: true,
           items: [
             { text: 'Overview', link: '/docs/sdks/amm/overview' },
+            { text: 'Guides',
+              collapsed: true,
+              items: [
+                { text: 'Quick Start', link: '/docs/sdks/amm/guides/quick-start' },
+                { text: 'Fetching Data', link: '/docs/sdks/amm/guides/fetching-data' },
+                { text: 'Pricing', link: '/docs/sdks/amm/guides/pricing' },
+                { text: 'Trading', link: '/docs/sdks/amm/guides/trading' },
+                { text: 'Getting Pair Addresses', link: '/docs/sdks/amm/guides/getting-pair-addresses' },
+              ]
+            },
+            { text: 'Reference',
+              collapsed: true,
+              items: [
+                { text: 'Getting Started', link: '/docs/sdks/amm/reference/getting-started' },
+                { text: 'Pair', link: '/docs/sdks/amm/reference/pair' },
+                { text: 'Route', link: '/docs/sdks/amm/reference/route' },
+                { text: 'Trade', link: '/docs/sdks/amm/reference/trade' },
+                { text: 'Other Exports', link: '/docs/sdks/amm/reference/other-exports' },
+              ]
+            }
           ]
         },
       ],

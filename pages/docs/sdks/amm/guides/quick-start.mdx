@@ -1,0 +1,52 @@
+# AMM SDK Quick start
+
+The AMM SDK exists to help developers build on top of Razor DEX. It's designed to run in any 
+environment that can execute JavaScript (think websites, node scripts, etc.). While simple enough 
+to use in a hackathon project, it's also robust enough to power production applications.
+
+## Installation
+
+:::code-group
+```bash [pnpm]
+pnpm add @razorlabs/amm-sdk
+```
+
+```bash [npm]
+npm install @razorlabs/amm-sdk
+```
+
+```bash [yarn]
+yarn add @razorlabs/amm-sdk
+```
+
+```bash [bun]
+bun add @razorlabs/amm-sdk
+```
+:::
+
+# Usage
+
+To run code from the SDK in your application, use an `import` or `require` statement, 
+depending on which your environment supports. Note that the guides following this page will 
+use ES6 syntax.
+
+## ES6 (import)
+
+```tsx twoslash
+import { ChainId } from '@razorlabs/swap-sdk-core'
+import { Pair } from '@razorlabs/amm-sdk'
+console.log(`The chainId of mainnet is ${ChainId.MAINNET}.`)
+```
+
+## CommonJS (require)
+
+```tsx
+const CORE = require('@razorlabs/swap-sdk-core')
+const AMM_SDK = require('@razorlabs/amm-sdk')
+console.log(`The chainId of mainnet is ${CORE.ChainId.MAINNET}.`)
+```
+
+# Reference
+
+Comprehensive reference material for the SDK is publicly available on the 
+[Razor Labs Github](https://github.com/razorlabsorg).

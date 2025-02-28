@@ -12,6 +12,7 @@
     "fromfractionalamount",
     "fromrawamount",
     "greaterthan",
+    "hackathon",
     "isnative",
     "ispercent",
     "istoken",
