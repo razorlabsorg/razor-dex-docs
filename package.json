@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vocs dev",
     "build": "vocs build",
+    "start": "serve dist",
     "preview": "vocs preview"
   },
   "dependencies": {
@@ -17,5 +18,8 @@
     "react-feather": "^2.0.10",
     "typescript": "latest",
     "vocs": "latest"
+  },
+  "devDependencies": {
+    "serve": "^14.2.5"
   }
 }
