@@ -2,10 +2,11 @@
   "name": "razordex-docs",
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@9.15.3",
   "scripts": {
     "dev": "vocs dev",
     "build": "vocs build",
-    "start": "serve dist",
+    "start": "serve dist -s -l tcp://0.0.0.0:${PORT:-3000}",
     "preview": "vocs preview"
   },
   "dependencies": {

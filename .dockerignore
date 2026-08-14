@@ -1,0 +1,11 @@
+node_modules
+dist
+.github
+.vscode
+.DS_Store
+*.local
+.env
+.env.*
+.vercel
+Dockerfile
+.dockerignore
